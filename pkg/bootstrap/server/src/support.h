@@ -37,6 +37,12 @@ public:
                                 Region_list *ram, Region_list *regions) = 0;
   virtual bool probe() = 0;
 
+  virtual void reboot()
+  {
+    while (1)
+      ;
+  }
+
   // remember the chosen platform
   static Platform_base *platform;
 
@@ -69,7 +75,7 @@ public:
     unsigned long ram_size_mb = scan_ram_size(RAM_BASE, RAM_SIZE_MB);
     printf("  Memory size is %ldMB%s (%08lx - %08lx)\n",
            ram_size_mb, ram_size_mb != RAM_SIZE_MB ? " (Limited by Scan)" : "",
-           (unsigned long)RAM_BASE, RAM_BASE + (ram_size_mb << 20));
+           (unsigned long)RAM_BASE, RAM_BASE + (ram_size_mb << 20) - 1);
     ram->add(Region::n(RAM_BASE,
                        (unsigned long long)RAM_BASE + (ram_size_mb << 20),
                        ".ram", Region::Ram));
