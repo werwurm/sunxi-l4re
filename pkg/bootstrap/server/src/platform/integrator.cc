@@ -3,7 +3,7 @@
  * \brief  Support for the integrator platform
  *
  * \date   2008-01-02
- * \author Adam Lackorznynski <adam@os.inf.tu-dresden.de>
+ * \author Adam Lackorzynski <adam@os.inf.tu-dresden.de>
  *
  */
 /*
@@ -26,7 +26,7 @@ class Platform_arm_int : public Platform_single_region_ram
   void init()
   {
     static L4::Io_register_block_mmio r(0x16000000);
-    static L4::Uart_pl011 _uart;
+    static L4::Uart_pl011 _uart(24019200);
     _uart.startup(&r);
     set_stdio_uart(&_uart);
   }
